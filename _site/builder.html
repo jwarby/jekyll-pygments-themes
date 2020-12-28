@@ -1187,68 +1187,107 @@
           
             <div role="tabpanel" class="tab-pane active" id="tab-javascript">
               
-              <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**</span>
-<span class="cm"> * Does a thing</span>
-<span class="cm"> */</span>
+              <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
+ * Does a thing
+ */</span>
 <span class="kd">function</span> <span class="nx">helloWorld</span><span class="p">(</span><span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">something</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
   <span class="c1">// Do something</span>
   <span class="k">if</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="nx">something</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello, world!</span><span class="dl">'</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="c1">// @TODO comment</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
             </div>
           
             <div role="tabpanel" class="tab-pane " id="tab-ruby">
               
-              <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
-  <span class="k">return</span> <span class="n">list</span> <span class="k">if</span> <span class="n">list</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="c1"># already sorted</span>
+              <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">list</span> <span class="k">if</span> <span class="n">list</span><span class="p">.</span><span class="nf">size</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="c1"># already sorted</span>
   <span class="n">swapped</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="k">while</span> <span class="n">swapped</span> <span class="k">do</span>
     <span class="n">swapped</span> <span class="o">=</span> <span class="kp">false</span>
-    <span class="mi">0</span><span class="o">.</span><span class="n">upto</span><span class="p">(</span><span class="n">list</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-      <span class="k">if</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span>
-        <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="c1"># swap values</span>
+    <span class="mi">0</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">size</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+      <span class="k">if</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># swap values</span>
         <span class="n">swapped</span> <span class="o">=</span> <span class="kp">true</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="n">list</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
             </div>
           
             <div role="tabpanel" class="tab-pane " id="tab-python">
               
-              <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+              <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
             </div>
           
             <div role="tabpanel" class="tab-pane " id="tab-java">
               
-              <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+              <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
  
 <span class="kd">class</span> <span class="nc">Palindrome</span>
 <span class="o">{</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span>
    <span class="o">{</span>
-      <span class="n">String</span> <span class="n">original</span><span class="o">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
-      <span class="n">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+      <span class="nc">String</span> <span class="n">original</span><span class="o">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+      <span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
  
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Enter a string to check if it is a palindrome&quot;</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Enter a string to check if it is a palindrome"</span><span class="o">);</span>
       <span class="n">original</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
  
       <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
@@ -1257,12 +1296,12 @@
          <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span> <span class="o">+</span> <span class="n">original</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
  
       <span class="k">if</span> <span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">reverse</span><span class="o">))</span>
-         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Entered string is a palindrome.&quot;</span><span class="o">);</span>
+         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Entered string is a palindrome."</span><span class="o">);</span>
       <span class="k">else</span>
-         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Entered string is not a palindrome.&quot;</span><span class="o">);</span>
+         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Entered string is not a palindrome."</span><span class="o">);</span>
  
    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+<span class="o">}</span></code></pre></figure>
 
             </div>
           

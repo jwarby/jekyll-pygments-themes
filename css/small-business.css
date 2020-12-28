@@ -162,7 +162,7 @@ hr {
   padding: 0;
 }
 #builder > .row {
-  height: 100%;
+  /*height: 100%;*/
 }
 #builder > .row > div:first-child {
   max-height: 90%;
@@ -237,7 +237,7 @@ hr {
   transition-property: border, box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
-  max-height: 35em;
+  /*max-height: 35em;*/
 }
 #builder .highlight *.identify {
   border: 1px solid #93c54b;

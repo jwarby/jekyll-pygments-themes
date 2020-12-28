@@ -108,16 +108,6 @@
           
           
           
-            
-          
-            
-          
-            
-              
-            
-          
-            
-          
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Python <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             
@@ -217,13 +207,52 @@
         </div>
         <div class="panel-body preview-autumn">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -241,13 +270,52 @@
         </div>
         <div class="panel-body preview-borland">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -265,13 +333,52 @@
         </div>
         <div class="panel-body preview-bw">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -289,13 +396,52 @@
         </div>
         <div class="panel-body preview-colorful">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -313,13 +459,52 @@
         </div>
         <div class="panel-body preview-default">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -337,13 +522,52 @@
         </div>
         <div class="panel-body preview-emacs">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -361,13 +585,52 @@
         </div>
         <div class="panel-body preview-friendly">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -385,13 +648,52 @@
         </div>
         <div class="panel-body preview-fruity">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -409,13 +711,52 @@
         </div>
         <div class="panel-body preview-github">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -433,13 +774,52 @@
         </div>
         <div class="panel-body preview-manni">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -457,13 +837,52 @@
         </div>
         <div class="panel-body preview-monokai">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -481,13 +900,52 @@
         </div>
         <div class="panel-body preview-murphy">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -505,13 +963,52 @@
         </div>
         <div class="panel-body preview-native">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -529,13 +1026,52 @@
         </div>
         <div class="panel-body preview-pastie">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -553,13 +1089,52 @@
         </div>
         <div class="panel-body preview-perldoc">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -577,13 +1152,52 @@
         </div>
         <div class="panel-body preview-tango">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -601,13 +1215,52 @@
         </div>
         <div class="panel-body preview-trac">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -625,13 +1278,52 @@
         </div>
         <div class="panel-body preview-vim">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -649,13 +1341,52 @@
         </div>
         <div class="panel-body preview-vs">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
@@ -673,13 +1404,52 @@
         </div>
         <div class="panel-body preview-zenburn">
           
-          <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Implementation of bubble sort &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c"># Swap!</span>
-                <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">items</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></code></pre></div>
+          <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+
+<span class="k">def</span> <span class="nf">showcase</span><span class="p">():</span>
+    <span class="s">"""Some code to showcase the syntax.
+    Docstrings are recognized and have an additional scope.
+    Color schemas can render them differently from other strings.
+    HACK doctests are highlighted too.
+        &gt;&gt;&gt; print('''hello
+        ... world''')
+    """</span>
+
+    <span class="o">@</span><span class="n">decorator</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s">'spam'</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">coroutine</span><span class="p">(</span><span class="n">db</span><span class="p">:</span><span class="n">aio_db</span><span class="p">.</span><span class="n">DatabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="s">r"""A coroutine."""</span>
+
+        <span class="k">await</span> <span class="n">logger</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">'working</span><span class="se">\x12</span><span class="s">with %r'</span><span class="p">,</span> <span class="n">aio_db</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">db</span><span class="p">.</span><span class="n">transaction</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(...)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'Result: </span><span class="si">{</span><span class="n">result</span><span class="err">!</span><span class="n">r</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># type: Dict[int, Any] # PEP 484
+</span>
+    <span class="c1"># a regular expression
+</span>    <span class="n">get_regex</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>     <span class="c1"># type: ignore
+</span>        <span class="s">r"""\A
+            word
+            (?:                         # a comment
+               (?P&lt;fill&gt;.)?
+               (?P&lt;align&gt;[&lt;&gt;=^])        (?# another comment)
+            )?
+            another word\.\.\.
+            (?:\.(?P&lt;precision&gt;0|(?!0)\d+))?
+        \Z"""</span><span class="p">,</span>
+        <span class="n">re</span><span class="p">.</span><span class="n">VERBOSE</span> <span class="o">|</span> <span class="n">re</span><span class="p">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># NOTE Numbers with leading zeros are invalid in Python 3,
+</span>    <span class="c1"># use 0o...
+</span>    <span class="n">answer</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mh">0xdeadbeef</span> <span class="o">+</span> <span class="mb">0b00100001</span> <span class="o">+</span> <span class="mi">0123</span> <span class="o">+</span> <span class="mo">0o123</span> <span class="o">+</span>
+                  <span class="mi">1_005_123</span> <span class="o">+</span> <span class="c1"># PEP 515
+</span>                  <span class="c1"># complex numbers
+</span>                  <span class="p">.</span><span class="mf">10e12</span> <span class="o">+</span> <span class="mf">2j</span><span class="p">)</span> <span class="o">@</span> <span class="n">mat</span>
+
+    <span class="k">return</span> <span class="s">R'''No escapes '\' in this \one'''</span></code></pre></figure>
 
         </div>
       </div>
