@@ -11,6 +11,6 @@ github_username:  jekyll
 
 # Build settings
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 gems:
  - jekyll-redirect-from
